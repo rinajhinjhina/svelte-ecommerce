@@ -6,10 +6,11 @@
 <style>
   .grid-col-3 {
     width: 70vw;
-    margin: 15vh auto;
+    margin: 10vh auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
+    justify-items: stretch;
   }
 </style>
 

@@ -28,12 +28,29 @@
   }
 
   ul li:last-child {
+    position: relative;
     display: flex;
     align-items: center;
   }
 
-  ul li:last-child .shopping-cart {
-    margin-right: 0.2em;
+  ul li .shopping-cart {
+    margin-left: 0.5em;
+  }
+
+  ul li .circle {
+    position: absolute;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    top: -2px;
+    right: -5px;
+    background-color: #fff596;
+    color: rgba(0, 0, 0, 0.8);
+    padding: 0.1em;
+    text-align: center;
+    line-height: 1em;
+    font-size: 0.4em;
+    width: 1em;
+    height: 1em;
+    border-radius: 1em;
   }
 </style>
 
@@ -41,13 +58,14 @@
   <ul>
     <li>SvelteCommerce</li>
     <li>
+      <span>Checkout</span>
       <object
         class="shopping-cart"
         aria-label="shopping cart"
         type="image/svg+xml"
         height="17"
         data="img/svg/checkout.svg" />
-      Checkout
+      <div class="circle">1</div>
     </li>
   </ul>
 </header>

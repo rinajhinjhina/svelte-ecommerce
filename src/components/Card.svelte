@@ -9,19 +9,19 @@
 <style>
   .item-card {
     align-self: stretch;
-    font-size: 10px;
+    justify-self: stretch;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 180px 2fr 1fr;
+    grid-template-rows: 300px 0.5fr 0.5fr;
     column-gap: 10px;
-    max-width: 300px;
     padding: 2em;
+    font-size: 15px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
   }
 
   img {
     width: 100%;
-    height: 180px;
+    height: 300px;
     object-fit: cover;
     grid-column: 1/4;
     grid-row: 1;
