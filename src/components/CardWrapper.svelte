@@ -16,6 +16,6 @@
 
 <section class="card-wrapper grid-col-3">
   {#each items as item}
-    <Card {...item} />
+    <Card {item} />
   {/each}
 </section>

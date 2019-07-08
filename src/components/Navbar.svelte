@@ -1,3 +1,13 @@
+<script>
+  import { cart } from "../stores/stores.js";
+
+  let cart_sum = 0;
+
+  const unsubscribe = cart.subscribe(items => {
+    cart_sum = items.length;
+  });
+</script>
+
 <style>
   header {
     width: 100vw;
@@ -39,18 +49,19 @@
 
   ul li .circle {
     position: absolute;
-    border: 1px solid rgba(0, 0, 0, 0.5);
     top: -2px;
     right: -5px;
-    background-color: #fff596;
-    color: rgba(0, 0, 0, 0.8);
+    background-color: #fffd85;
+    color: #000;
+    font-weight: 700;
     padding: 0.1em;
     text-align: center;
     line-height: 1em;
-    font-size: 0.4em;
+    font-size: 0.6em;
     width: 1em;
     height: 1em;
     border-radius: 1em;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
   }
 </style>
 
@@ -58,14 +69,15 @@
   <ul>
     <li>SvelteCommerce</li>
     <li>
-      <span>Checkout</span>
       <object
         class="shopping-cart"
         aria-label="shopping cart"
         type="image/svg+xml"
-        height="17"
-        data="img/svg/checkout.svg" />
-      <div class="circle">1</div>
+        data="img/svg/checkout.svg"
+        height="34px" />
+      {#if cart_sum > 0}
+        <div class="circle">{cart_sum}</div>
+      {/if}
     </li>
   </ul>
 </header>

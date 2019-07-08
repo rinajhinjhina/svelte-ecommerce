@@ -1,9 +1,13 @@
 <script>
-  export let img;
-  export let name;
-  export let price;
-
+  export let item;
+  let { img, name, price } = item;
   img = `img/${img}`;
+
+  import { cart } from "../stores/stores.js";
+
+  function addToCart() {
+    cart.update(n => [...n, item]);
+  }
 </script>
 
 <style>
@@ -73,7 +77,7 @@
   <img src={img} alt={name} />
   <h3 class="title">{name}</h3>
   <p class="price">৳ {price}</p>
-  <button>
+  <button on:click={addToCart}>
     <object
       aria-label="shopping cart"
       type="image/svg+xml"
