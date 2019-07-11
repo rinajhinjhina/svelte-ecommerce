@@ -41,6 +41,7 @@
     position: relative;
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
 
   ul li .shopping-cart {
@@ -62,6 +63,18 @@
     height: 1em;
     border-radius: 1em;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
+  }
+
+  @media screen and (max-width: 1600px) {
+    ul {
+      width: 80vw;
+    }
+  }
+
+  @media screen and (max-width: 1400px) {
+    ul {
+      width: 90vw;
+    }
   }
 </style>
 
