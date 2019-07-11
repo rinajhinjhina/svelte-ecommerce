@@ -1,11 +1,26 @@
 <script>
   import { cart } from "../stores/stores.js";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
 
   let cart_sum = 0;
 
   const unsubscribe = cart.subscribe(items => {
     cart_sum = items.length;
   });
+
+  function goToHome() {
+    dispatch("nav", {
+      option: "home"
+    });
+  }
+
+  function goToCheckout() {
+    dispatch("nav", {
+      option: "checkout"
+    });
+  }
 </script>
 
 <style>
@@ -35,13 +50,13 @@
   ul li {
     align-self: center;
     height: 100%;
+    cursor: pointer;
   }
 
   ul li:last-child {
     position: relative;
     display: flex;
     align-items: center;
-    cursor: pointer;
   }
 
   ul li .shopping-cart {
@@ -80,13 +95,13 @@
 
 <header>
   <ul>
-    <li>SvelteCommerce</li>
-    <li>
-      <object
+    <li on:click={goToHome}>SvelteCommerce</li>
+    <li on:click={goToCheckout}>
+      <img
         class="shopping-cart"
         aria-label="shopping cart"
-        type="image/svg+xml"
-        data="img/svg/checkout.svg"
+        alt="Checkout"
+        src="img/svg/checkout.svg"
         height="34px" />
       {#if cart_sum > 0}
         <div class="circle">{cart_sum}</div>
