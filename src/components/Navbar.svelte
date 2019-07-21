@@ -7,7 +7,11 @@
   let cart_sum = 0;
 
   const unsubscribe = cart.subscribe(items => {
-    cart_sum = items.length;
+    const itemValues = Object.values(items);
+    cart_sum = 0;
+    itemValues.forEach(item => {
+      cart_sum += item.count;
+    });
   });
 
   function goToHome() {

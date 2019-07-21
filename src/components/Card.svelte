@@ -1,12 +1,19 @@
 <script>
+  import { get } from "svelte/store";
+  import { cart } from "../stores/stores.js";
+
   export let item;
   let { img, name, price } = item;
   img = `img/${img}`;
 
-  import { cart } from "../stores/stores.js";
+  const cartItems = get(cart);
+  let inCart = cartItems[name] ? cartItems[name].count : 0;
 
   function addToCart() {
-    cart.update(n => [...n, item]);
+    inCart++;
+    cart.update(n => {
+      return { ...n, [name]: { ...item, count: inCart } };
+    });
   }
 </script>
 
@@ -41,14 +48,19 @@
   .price {
     grid-column: 3;
     grid-row: 2;
-    font-size: 1.3em;
+    font-size: 1.1em;
     justify-self: end;
     align-self: center;
   }
 
-  button {
+  .button-group {
     grid-column: 1/3;
     grid-row: 3;
+    display: flex;
+    align-content: center;
+  }
+
+  button {
     font-size: 1.2em;
     display: flex;
     align-self: end;
@@ -71,17 +83,31 @@
     margin-right: 0.5em;
     height: 1.2em;
   }
+
+  .button-group p {
+    align-self: center;
+    color: rgba(0, 0, 0, 0.5);
+    margin-left: 1em;
+    font-size: 0.8em;
+  }
 </style>
 
 <div class="item-card">
   <img src={img} alt={name} />
   <h3 class="title">{name}</h3>
   <p class="price">৳ {price}</p>
-  <button on:click={addToCart}>
-    <object
-      aria-label="shopping cart"
-      type="image/svg+xml"
-      data="img/svg/shopping-cart.svg" />
-    Add to cart
-  </button>
+  <div class="button-group">
+    <button on:click={addToCart}>
+      <object
+        aria-label="shopping cart"
+        type="image/svg+xml"
+        data="img/svg/shopping-cart.svg" />
+      Add to cart
+    </button>
+    {#if inCart > 0}
+      <p>
+        <em>({inCart} in cart)</em>
+      </p>
+    {/if}
+  </div>
 </div>
