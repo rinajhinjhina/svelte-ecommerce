@@ -31,6 +31,15 @@ label {
 	display: block;
 }
 
+button:active,
+button:focus {
+	outline: none;
+}
+
+button {
+	cursor: pointer;
+}
+
 input,
 button,
 select,
@@ -60,8 +69,4 @@ button {
 
 button:active {
 	background-color: #ddd;
-}
-
-button:focus {
-	border-color: #666;
 }

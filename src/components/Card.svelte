@@ -54,7 +54,7 @@
   }
 
   .button-group {
-    grid-column: 1/3;
+    grid-column: 1/4;
     grid-row: 3;
     display: flex;
     align-content: center;
@@ -84,12 +84,18 @@
     height: 1.2em;
   }
 
-  .button-group p {
+  .button-group span {
     align-self: center;
     color: rgba(0, 0, 0, 0.5);
     margin-left: 1em;
     font-size: 0.8em;
   }
+
+  /* @media screen and (max-width: 880px){
+    .button-group{
+
+    }
+  } */
 </style>
 
 <div class="item-card">
@@ -105,9 +111,9 @@
       Add to cart
     </button>
     {#if inCart > 0}
-      <p>
+      <span>
         <em>({inCart} in cart)</em>
-      </p>
+      </span>
     {/if}
   </div>
 </div>

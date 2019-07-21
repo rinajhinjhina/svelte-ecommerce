@@ -1,12 +1,20 @@
 <script>
+  import CheckoutItem from "./CheckoutItem.svelte";
   import { cart } from "../stores/stores.js";
 
-  let cartItems = [];
-  const unsubscribe = cart.subscribe(
-    items => (cartItems = Object.values(items))
-  );
+  let checkedOut = false;
 
-  console.log(cartItems);
+  let cartItems = [];
+  const unsubscribe = cart.subscribe(items => {
+    cartItems = Object.values(items);
+  });
+
+  const checkout = () => {
+    checkedOut = true;
+    cart.update(n => {
+      return {};
+    });
+  };
 </script>
 
 <style>
@@ -17,29 +25,17 @@
     flex-direction: column;
   }
 
-  .item-grid {
-    display: flex;
+  .empty-message {
+    margin: 10px 0;
   }
 
-  img {
-    width: 25%;
-    height: 200px;
-    object-fit: cover;
-    margin: 10px 20px 10px 0;
-  }
-
-  .item-meta-data {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .item-meta-data h3 {
-    margin-top: 0;
-  }
-
-  .item-meta-data p {
-    margin: 0.2em 0;
+  button.checkout {
+    align-self: flex-start;
+    padding: 5px 20px;
+    margin: 20px 0;
+    background: #20447d;
+    color: white;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   }
 
   @media screen and (max-width: 1600px) {
@@ -53,18 +49,26 @@
       width: 90vw;
     }
   }
+
+  @media screen and (max-width: 454px) {
+    button.checkout {
+      align-self: stretch;
+    }
+  }
 </style>
 
 <div class="checkout-container">
   <h1>My Cart</h1>
-  {#each cartItems as item}
-    <div class="item-grid">
-      <img src={`img/${item.img}`} alt={item.name} />
-      <div class="item-meta-data">
-        <h3 class="title">{item.name}</h3>
-        <p class="price">Price: ৳ {item.price}</p>
-        <p class="count">Quantity: {item.count}</p>
-      </div>
-    </div>
-  {/each}
+  {#if cartItems.length === 0}
+    {#if checkedOut}
+      <p class="empty-message">Thank you for shopping with us</p>
+    {:else}
+      <p class="empty-message">Your cart is empty</p>
+    {/if}
+  {:else}
+    {#each cartItems as item (item.name)}
+      <CheckoutItem {item} />
+    {/each}
+    <button class="checkout" on:click={checkout}>Checkout</button>
+  {/if}
 </div>
